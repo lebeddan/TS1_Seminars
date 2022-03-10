@@ -12,25 +12,52 @@ import javax.mail.internet.MimeMessage;
  * @author balikm1
  */
 public class MailHelper {
-   
-    public static void createAndSendMail(String to, String subject, String body)
-    {
-        Mail mail = new Mail();
-        mail.setTo(to);
-        mail.setSubject(subject);
-        mail.setBody(body);
-        mail.setIsSent(false);
-        DBManager dbManager = new DBManager();
-        dbManager.saveMail(mail);
 
+
+    private Mail mail;
+
+    public MailHelper(Mail mail) {
+        mail = new Mail();
+    }
+
+    public Mail getMail()
+    {
+        return mail;
+    }
+
+    public void createAndSendMail(String to, String subject, String body)
+    {
+        getMail(to, subject, body);
+        saveMail();
+        handleDebugAndSend();
+
+    }
+
+    private void handleDebugAndSend()
+    {
         if (!Configuration.isDebug) {
             (new Thread(() -> {
                 sendMail(mail.getMailId());
             })).start();
         }
     }
-    
-    public static void sendMail(int mailId)
+
+    private void saveMail()
+    {
+        DBManager dbManager = new DBManager();
+        dbManager.saveMail(mail);
+    }
+
+    private static Mail getMail(String to, String subject, String body) {
+        Mail mail = new Mail();
+        mail.setTo(to);
+        mail.setSubject(subject);
+        mail.setBody(body);
+        mail.setIsSent(false);
+        return mail;
+    }
+
+    public void sendMail(int mailId)
     {
         try
         {
