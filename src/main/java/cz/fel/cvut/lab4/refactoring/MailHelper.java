@@ -16,8 +16,8 @@ public class MailHelper {
 
     private Mail mail;
 
-    public MailHelper(Mail mail) {
-        mail = new Mail();
+    public MailHelper(DBManager mail) {
+        mail = new DBManager();
     }
 
     public Mail getMail()
@@ -92,5 +92,6 @@ public class MailHelper {
           e.printStackTrace();
         }
     }
-    
+
+
 }
