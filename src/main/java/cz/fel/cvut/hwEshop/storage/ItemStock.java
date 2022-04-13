@@ -1,6 +1,6 @@
-package cz.fel.cvut.lab5.storage;
+package cz.fel.cvut.hwEshop.storage;
 
-import cz.fel.cvut.lab5.shop.Item;
+import cz.fel.cvut.hwEshop.shop.Item;
 
 
 /**
@@ -10,7 +10,7 @@ public class ItemStock {
     private Item refItem;
     private int count;
     
-    ItemStock(Item refItem) {
+    public ItemStock(Item refItem) {
         this.refItem = refItem;
         count = 0;
     }

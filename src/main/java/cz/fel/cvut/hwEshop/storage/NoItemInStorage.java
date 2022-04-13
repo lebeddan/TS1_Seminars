@@ -1,4 +1,4 @@
-package cz.fel.cvut.lab5.storage;
+package cz.fel.cvut.hwEshop.storage;
 
 public class NoItemInStorage extends Exception{
     public NoItemInStorage() {
